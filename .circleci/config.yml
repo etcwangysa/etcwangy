@@ -3,7 +3,7 @@ version: 2.1
 executors:
   linux:
     docker:
-      - image: cimg/base:2021.04
+      - image: cimg/go:1.13-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
