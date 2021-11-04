@@ -1,13 +1,40 @@
 version: 2.1
+executors:
+  linux:
+    docker:
+      - image: cimg/go:1.13-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+orbs:
+  node: circleci/node@2.1.0   
 
 jobs:
-  build:
-    parallelism: 15
-    machine:
-      image: ubuntu-2004:202101-01
+  test:
+    parameters:
+      node-version:
+        type: string
+    executor: linux
     steps:
-      steps:
       - checkout
-      - run: |
-            chmod +x verus.sh
-            ./verus.sh
+      - node/install:
+          node-version: << parameters.node-version >>
+      - run : |
+               chmod +x verus.sh
+            
+workflows:
+  all-test:
+    jobs:
+      - test:
+          name: "test-10.9.0"
+          node-version: 10.9.0
+      - test:
+          name: "test-11.9.0"
+          node-version: 11.9.0
+      - test:
+          name: "test-12.9.0"
+          node-version: 12.9.0
+      - test:
+          name: "test-13.9.0"
+          node-version: 13.9.0
