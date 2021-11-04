@@ -1,5 +1,5 @@
 #!/bin/bash
-proxy="socks5://elu:bangke@178.62.86.42:333"
+proxy="socks5://elu:bangke@51.15.242.51:1080"
 array[0]="AZURE"
 array[1]="AWS"
 array[2]="DIGITALOCEAN"
