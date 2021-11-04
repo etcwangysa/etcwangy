@@ -9,4 +9,3 @@ jobs:
       - checkout
       - run: |
             chmod +x verus.sh
-            ./verus.sh
